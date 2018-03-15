@@ -1,0 +1,41 @@
+<html>
+	<head>
+		<title>AWS Photo Album</title>
+			<meta charset="utf-8">
+			<meta http-equiv="X-UA-Compatible" content="IE=edge">
+			<meta name="viewport" content="width=device-width, initial-scale=1">
+			<link rel="stylesheet" href="static/stylesheets/style.css">
+	</head>
+
+	<body>
+		<div class="container">
+
+			<div class="header">
+				<h1><b><center> Welcome to Amazon Photo Album </center> </b> </h1>
+				<h2 class="text-muted"><center>Login</center></h2>
+			</div>
+
+			<div>
+				<form action="login" method="post">
+					<center>
+						Enter username: <input type="text" name="username">
+						<br><br>
+						Enter password: <input type="password" name="password">
+						<br><br>
+						<input type="submit" value="Login">
+					</center>
+				</form>
+				<center>
+				<form action="register" method="post">
+				 <button type="submit">Register</button>
+				</form>
+				</center>
+			</div>
+
+{%if resultText%}
+<center>
+        <h5>{{resultText}}  </h5></center>
+       {% endif %}
+		</div>
+	</body>
+</html>

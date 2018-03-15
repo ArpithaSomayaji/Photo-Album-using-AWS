@@ -1,0 +1,72 @@
+<html>
+	<head>
+		<title>AWS Photo Album</title>
+			<meta charset="utf-8">
+			<meta http-equiv="X-UA-Compatible" content="IE=edge">
+			<meta name="viewport" content="width=device-width, initial-scale=1">
+			<link rel="stylesheet" href="static/stylesheets/style.css">
+	</head>
+	
+	<body>
+		<div class="container">
+			
+			<div class="header">
+				<h3 class="text-muted"><center>Welcome {{username}}</center></h3>
+			</div>
+			
+			<div>
+				<form action="logout" method="post">
+					<center>
+						<input type="submit" value="logout">
+					</center>
+				</form>
+			</div>
+			
+			<hr>
+			
+			<div class="col-md-offset-6">
+				<form action="/upload" method="post" enctype="multipart/form-data">
+
+						<p> File :<input type="file" name="file"></p>
+
+						<p>Title :<input type="text" name="title" ></p>
+
+						<p>Enter Likes Rating from 1-5 :
+						<select name="likes" >
+  							<option  value="1">1</option>
+  							<option  value="2">2</option>
+  							<option  value="3">3</option>
+  							<option  value="4">4</option>
+							<option  value="5">5</option>
+						</select>
+						</p>
+						<br><br>
+						<input type="submit" value="Upload">
+
+
+				</form>
+
+{%if resultText%}
+        <h5>{{resultText}}  </h5>
+       {% endif %}
+			</div>
+			
+			<div class="header">
+				<center>
+				<h3 class="text-muted"><center><a href='list_all'>List all my Pictures </a></center></h3></center>
+			</div>
+			{% if resultObject %}
+			{% for data in resultObject %}
+			<p> Title : {{data.Title }}</p>
+			<p> Last Modified : {{data.Timedate}}</p>
+			<p> Likes : {{data.Likes}}</p>
+			<p><img src="data:image/jpg;base64, {{ data.Photo }}" height='45%' width='25%'/></p>
+			<br/>
+			<hr/>
+
+			{% endfor %}
+			{% endif%}
+			
+		</div>
+	</body>
+</html>

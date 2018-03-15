@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <meta charset="UTF-8">
+
+	<head>
+		<title>AWS Photo Album</title>
+			<meta charset="utf-8">
+			<meta http-equiv="X-UA-Compatible" content="IE=edge">
+			<meta name="viewport" content="width=device-width, initial-scale=1">
+			<link rel="stylesheet" href="static/stylesheets/style.css">
+          <style>
+table, th, td {
+    border: 1px solid black;
+}
+td,th {
+    padding: 10px;
+}
+</style>
+	</head>
+	
+	<body>
+		<div class="container">
+			
+			<div class="header">
+				<h3 class="text-muted"><center>Welcome {{username}}</center></h3>
+			</div>
+			
+			<div>
+				<form action="logout" method="post">
+					<center>
+						<input type="submit" value="logout">
+					</center>
+				</form>
+			</div>
+			
+
+		
+
+			<div class="header">
+				<center>
+				<h3 class="text-muted"><center><a href='login'>Back </a></center></h3></center>
+			</div>
+
+            <table width="100%">
+
+			{% if resultObject %}
+			{% for data in resultObject %}
+                <td width="50%">
+			<p> Title : {{data.Title }}</p>
+			<p> Last Modified : {{data.Timedate}}</p>
+			<p> Likes : {{data.Likes}}     </p>
+            <form action="downloadImage" method="post">
+
+                        <input type="hidden" name="PhotoID" value="{{data.PhotoID}}">
+						<input type="submit" value="Download">
+
+				</form>
+					{% if data.Fileext =='jpg' %}
+			<p><img src="data:image/jpg;base64, {{ data.Photo }}" height='45%' width='25%'/></p>
+					{% else %}
+
+					<p> {{data.Photo}}</p>
+					{% endif %}
+
+                </td>
+			{% endfor %}
+                {% elif response %}
+                <p> Downloading Image....</p>
+                    {% else %}
+                <p> No Images ! To upload Go Back !</p>
+			{% endif%}
+			</table>
+		</div>
+	</body>
+
+
+</html>
